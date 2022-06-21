@@ -13,7 +13,7 @@ def create_user_profile(sender, instance, created, **kwarg):
 
 
 @receiver(pre_save, sender=User)
-def generate_username(sender, instance, created, **kwarg):
+def generate_username(sender, instance, **kwarg):
     username = f'{instance.first_name}_{instance.last_name}'.lower()
     counter = 1
 
