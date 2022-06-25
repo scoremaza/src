@@ -17,14 +17,16 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from users import router as user_api_router
-auth_api_urls = []
+auth_api_urls = [
+    path(r'', include('rest_framework_social_oauth2.urls')),
+]
 
 if settings.DEBUG:
     auth_api_urls.append(path(r'verify/', include('rest_framework.urls')))
 
 api_url_patterns = [
-    path('auth/', include(auth_api_urls)),
-    path('accounts/', include(user_api_router.router.urls))
+    path(r'auth/', include(auth_api_urls)),
+    path(r'accounts/', include(user_api_router.router.urls))
 ]
 
 urlpatterns = [
